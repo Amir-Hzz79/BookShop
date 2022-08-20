@@ -19,6 +19,8 @@ namespace BookShop.DataLayer.Models
         [Required(ErrorMessage = "Please upload book file")]
         public string File { get; set; }
 
+        public string Price { get; set; }
+
         public virtual List<Author> Authors { get; set; }
 
         public Book()

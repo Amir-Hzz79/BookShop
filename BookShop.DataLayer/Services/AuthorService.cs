@@ -20,7 +20,7 @@ namespace BookShop.DataLayer.Services
         {
             try
             {
-                _Context.authors.Remove(author);
+                _Context.Authors.Remove(author);
                 return true;
             }
             catch
@@ -33,7 +33,7 @@ namespace BookShop.DataLayer.Services
         {
             try
             {
-                _Context.Remove(_Context.authors.Find(authorId));
+                _Context.Remove(_Context.Authors.Find(authorId));
                 return true;
             }
             catch
@@ -44,19 +44,19 @@ namespace BookShop.DataLayer.Services
 
         public Author Get(int authorId)
         {
-            return _Context.authors.Find(authorId);
+            return _Context.Authors.Find(authorId);
         }
 
         public IEnumerable<Author> GetAll()
         {
-            return _Context.authors;
+            return _Context.Authors;
         }
 
         public bool Insert(Author author)
         {
             try
             {
-                _Context.authors.Add(author);
+                _Context.Authors.Add(author);
                 return true;
             }
             catch
@@ -75,7 +75,7 @@ namespace BookShop.DataLayer.Services
         {
             try
             {
-                _Context.authors.Update(author);
+                _Context.Authors.Update(author);
                 return true;
             }
             catch

@@ -22,5 +22,7 @@ namespace BookShop.DataLayer.Services
         IEnumerable<Book> GetAll();
 
         void Save();
+
+        IEnumerable<Book> GetLastBooks(int count);
     }
 }

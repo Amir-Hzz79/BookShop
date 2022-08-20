@@ -52,6 +52,11 @@ namespace BookShop.DataLayer.Services
             return _Context.Books;
         }
 
+        public IEnumerable<Book> GetLastBooks(int count)
+        {
+            return _Context.Books.OrderByDescending(s => s.AddDate).Take(count);
+        }
+
         public bool Insert(Book book)
         {
             try

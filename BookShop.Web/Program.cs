@@ -1,10 +1,13 @@
-using BookShop.DataLayer.Context;
+using BookShop.DataLayer;
+using BookShop.DataLayer.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddScoped<IBookService,BookService>();
+builder.Services.AddScoped<IAuthorService, AuthorService>();
 
 builder.Services.AddDbContext<BookShopContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("MainConnection")));
 
