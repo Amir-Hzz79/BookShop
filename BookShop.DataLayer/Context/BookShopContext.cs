@@ -9,10 +9,22 @@ namespace BookShop.DataLayer
 
         public DbSet<Author> Authors { get; set; }
 
-
-        public BookShopContext(DbContextOptions<BookShopContext> dbContextOptions) : base(dbContextOptions)
+        public BookShopContext()
         {
-                
+
+        }
+
+        public BookShopContext(DbContextOptions<BookShopContext> options)
+        : base(options)
+        {
+            
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if(!optionsBuilder.IsConfigured)
+            optionsBuilder.UseSqlServer("MainConnection");
+            
         }
     }
 }

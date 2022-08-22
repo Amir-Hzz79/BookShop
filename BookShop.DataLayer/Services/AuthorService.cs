@@ -1,9 +1,7 @@
-﻿using BookShop.DataLayer.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+
+using BookShop.DataLayer.Models;
+using System.Linq.Expressions;
 
 namespace BookShop.DataLayer.Services
 {
@@ -42,6 +40,13 @@ namespace BookShop.DataLayer.Services
             }
         }
 
+        public Author FirstOrDefault(Expression<Func<Author, bool>> filter)
+        {
+            IQueryable<Author> query = _Context.Authors.Where(filter);
+
+            return query.FirstOrDefault();
+        }
+
         public Author Get(int authorId)
         {
             return _Context.Authors.Find(authorId);
@@ -50,6 +55,11 @@ namespace BookShop.DataLayer.Services
         public IEnumerable<Author> GetAll()
         {
             return _Context.Authors;
+        }
+
+        public IEnumerable<string> GetAllNames()
+        {
+            return _Context.Authors.Select(x => x.Name);
         }
 
         public bool Insert(Author author)

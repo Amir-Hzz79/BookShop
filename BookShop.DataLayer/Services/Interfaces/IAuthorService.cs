@@ -1,4 +1,5 @@
 ﻿using BookShop.DataLayer.Models;
+using System.Linq.Expressions;
 
 namespace BookShop.DataLayer.Services
 {
@@ -15,6 +16,10 @@ namespace BookShop.DataLayer.Services
         Author Get(int authorId);
 
         IEnumerable<Author> GetAll();
+
+        IEnumerable<string> GetAllNames();
+
+        Author FirstOrDefault(Expression<Func<Author, bool>> filter);
 
         void Save();
     }

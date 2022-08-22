@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -42,6 +43,13 @@ namespace BookShop.DataLayer.Services
             }
         }
 
+        public Book FirstOrDefault(Expression<Func<Book, bool>> filter)
+        {
+            IQueryable<Book> query = _Context.Books.Where(filter);
+
+            return query.FirstOrDefault();
+        }
+
         public Book Get(int bookId)
         {
             return _Context.Books.Find(bookId);
@@ -50,6 +58,11 @@ namespace BookShop.DataLayer.Services
         public IEnumerable<Book> GetAll()
         {
             return _Context.Books;
+        }
+
+        public IEnumerable<string> GetAllNames()
+        {
+            return _Context.Books.Select(x => x.Name);
         }
 
         public IEnumerable<Book> GetLastBooks(int count)

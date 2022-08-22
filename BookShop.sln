@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookShop.Web", "BookShop.Web\BookShop.Web.csproj", "{48027F3A-695A-4877-861A-055633326713}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookShop.Web", "BookShop.Web\BookShop.Web.csproj", "{48027F3A-695A-4877-861A-055633326713}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookShop.DataLayer", "BookShop.DataLayer\BookShop.DataLayer.csproj", "{D8EC0DC4-3BB4-4117-863A-22D910C45CD3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookShop.DataLayer", "BookShop.DataLayer\BookShop.DataLayer.csproj", "{D8EC0DC4-3BB4-4117-863A-22D910C45CD3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

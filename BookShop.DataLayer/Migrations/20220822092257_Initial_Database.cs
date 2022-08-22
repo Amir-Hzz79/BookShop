@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -9,7 +10,7 @@ namespace BookShop.DataLayer.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "authors",
+                name: "Authors",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -19,7 +20,7 @@ namespace BookShop.DataLayer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_authors", x => x.Id);
+                    table.PrimaryKey("PK_Authors", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -31,7 +32,9 @@ namespace BookShop.DataLayer.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    File = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    AddDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    File = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -49,9 +52,9 @@ namespace BookShop.DataLayer.Migrations
                 {
                     table.PrimaryKey("PK_AuthorBook", x => new { x.AuthorsId, x.BooksId });
                     table.ForeignKey(
-                        name: "FK_AuthorBook_authors_AuthorsId",
+                        name: "FK_AuthorBook_Authors_AuthorsId",
                         column: x => x.AuthorsId,
-                        principalTable: "authors",
+                        principalTable: "Authors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -74,7 +77,7 @@ namespace BookShop.DataLayer.Migrations
                 name: "AuthorBook");
 
             migrationBuilder.DropTable(
-                name: "authors");
+                name: "Authors");
 
             migrationBuilder.DropTable(
                 name: "Books");
