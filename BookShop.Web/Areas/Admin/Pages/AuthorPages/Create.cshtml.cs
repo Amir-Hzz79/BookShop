@@ -29,7 +29,7 @@ namespace BookShop.Web.Areas.Admin.Pages.AuthorPages
         
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPostAsync()
         {
           if (!ModelState.IsValid || _authorService.GetAll() == null || Author == null)
             {

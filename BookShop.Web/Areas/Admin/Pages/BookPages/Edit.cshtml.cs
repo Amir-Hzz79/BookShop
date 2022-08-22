@@ -9,16 +9,20 @@ namespace BookShop.Web.Areas.Admin.Pages.BookPages
     public class EditModel : PageModel
     {
         private readonly IBookService _bookService;
+        private readonly IAuthorService _authorService;
 
-        public EditModel(IBookService context)
+        public EditModel(IBookService bookService, IAuthorService authorService)
         {
-            _bookService = context;
+            _bookService = bookService;
+            _authorService = authorService;
         }
 
         [BindProperty]
         public Book Book { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public List<string> AuthorsName { get; set; }
+
+        public IActionResult OnGetAsync(int? id)
         {
             if (id == null || _bookService.GetAll() == null)
             {
@@ -26,6 +30,7 @@ namespace BookShop.Web.Areas.Admin.Pages.BookPages
             }
 
             var book = _bookService.FirstOrDefault(m => m.Id == id);
+            AuthorsName = _authorService.GetAllNames().ToList();
             if (book == null)
             {
                 return NotFound();
@@ -36,7 +41,7 @@ namespace BookShop.Web.Areas.Admin.Pages.BookPages
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPostAsync()
         {
             if (!ModelState.IsValid)
             {

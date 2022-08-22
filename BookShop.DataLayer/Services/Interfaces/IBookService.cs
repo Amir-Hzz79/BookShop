@@ -22,7 +22,7 @@ namespace BookShop.DataLayer.Services
 
         IEnumerable<Book> GetAll();
 
-        IEnumerable<string> GetAllNames();
+        //IEnumerable<Author> GetAuthors(int id);
 
         Book FirstOrDefault(Expression<Func<Book, bool>> filter);
 

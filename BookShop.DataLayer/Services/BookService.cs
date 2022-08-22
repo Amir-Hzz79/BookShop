@@ -1,4 +1,5 @@
 ﻿using BookShop.DataLayer.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,7 +46,7 @@ namespace BookShop.DataLayer.Services
 
         public Book FirstOrDefault(Expression<Func<Book, bool>> filter)
         {
-            IQueryable<Book> query = _Context.Books.Where(filter);
+            IQueryable<Book> query = _Context.Books.Where(filter).Include(x => x.Authors);
 
             return query.FirstOrDefault();
         }
@@ -57,13 +58,13 @@ namespace BookShop.DataLayer.Services
 
         public IEnumerable<Book> GetAll()
         {
-            return _Context.Books;
+            return _Context.Books.Include(x => x.Authors);
         }
 
-        public IEnumerable<string> GetAllNames()
-        {
-            return _Context.Books.Select(x => x.Name);
-        }
+        //public IEnumerable<Author> GetAuthors(int id)
+        //{
+        //    return _Context.Authors.Where(x=>x.Id==id);
+        //}
 
         public IEnumerable<Book> GetLastBooks(int count)
         {

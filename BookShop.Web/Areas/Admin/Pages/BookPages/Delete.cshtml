@@ -18,6 +18,9 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Book.Name)
         </dd>
+        <dd>
+            <select class="form-control" asp-items="new SelectList(Model.Book.Authors)"></select>
+        </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Book.Description)
         </dt>

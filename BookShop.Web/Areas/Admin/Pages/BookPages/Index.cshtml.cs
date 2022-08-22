@@ -7,25 +7,29 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BookShop.DataLayer;
 using BookShop.DataLayer.Models;
+using BookShop.DataLayer.Services;
 
 namespace BookShop.Web.Areas.Admin.Pages.BookPages
 {
     public class IndexModel : PageModel
     {
-        private readonly BookShop.DataLayer.BookShopContext _context;
+        private readonly IBookService _bookService;
 
-        public IndexModel(BookShop.DataLayer.BookShopContext context)
+        public IndexModel(IBookService context)
         {
-            _context = context;
+            _bookService = context;
         }
 
-        public IList<Book> Book { get;set; } = default!;
+        public IList<Book> Books { get;set; } = default!;
+
+        //public List<> AuthorsName { get;set; };
 
         public async Task OnGetAsync()
         {
-            if (_context.Books != null)
+            if (_bookService.GetAll() != null)
             {
-                Book = await _context.Books.ToListAsync();
+                Books = _bookService.GetAll().ToList();
+                //AuthorsName = Books.Authors.Name;
             }
         }
     }
