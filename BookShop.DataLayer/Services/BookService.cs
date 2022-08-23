@@ -61,9 +61,14 @@ namespace BookShop.DataLayer.Services
             return _Context.Books.Include(x => x.Authors);
         }
 
-        //public IEnumerable<Author> GetAuthors(int id)
+        public IEnumerable<string> GetAllNames()
+        {
+            return _Context.Books.Select(x => x.Name);
+        }
+
+        //public IEnumerable<string> GetAuthorsName(int id)
         //{
-        //    return _Context.Authors.Where(x=>x.Id==id);
+        //    return _Context.Books.Select(_Context.Books.Find(id).Name);
         //}
 
         public IEnumerable<Book> GetLastBooks(int count)
@@ -76,6 +81,7 @@ namespace BookShop.DataLayer.Services
             try
             {
                 _Context.Books.Add(book);
+               //book.Authors.Add
                 return true;
             }
             catch
