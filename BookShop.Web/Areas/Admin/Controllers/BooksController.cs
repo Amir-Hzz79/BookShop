@@ -1,5 +1,6 @@
 ﻿using BookShop.DataLayer.Models;
 using BookShop.DataLayer.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace BookShop.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize]
     public class BooksController : Controller
     {
         private readonly Microsoft.AspNetCore.Hosting.IHostingEnvironment _hosting;

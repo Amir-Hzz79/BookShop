@@ -17,7 +17,7 @@
                             <div class="d-flex justify-content-between mb-3">
                                 <small class="m-0"><i class="far fa-clock text-primary mr-2"></i>@item.AddDate.ToShortDateString()</small>
                             </div>
-                            <a class="h5" href="Pages/Course/@item.Id" >@item.Name</a>
+                            <a class="h5" asp-controller="Book" asp-action="Index" >@item.Name</a>
                             <div class="border-top mt-4 pt-4">
                                 <div class="d-flex justify-content-between">
                                     <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small></h6>

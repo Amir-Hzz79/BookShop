@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> _signInManager
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -20,6 +23,8 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
+    
 </head>
 <body>
      <!-- Topbar Start -->
@@ -29,13 +34,35 @@
                 <a href="" class="text-decoration-none">
                     <h1 class="m-0"><span class="text-primary">E</span>COURSES</h1>
                 </a>
+                <ul class="navbar-nav ">
+                    @if (!_signInManager.IsSignedIn(User))
+                    {
+                        <li class="nav-item">
+                            <a class="text-decoration-none" asp-controller="Account" asp-action="Login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="text-decoration-none" asp-controller="Account" asp-action="Register">Register</a>
+                        </li>                        
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            User @User.Identity.Name
+                        </li>
+                        <li class="nav-item">
+                            <a class="text-decoration-none" asp-controller="Account" asp-action="Logout">Logout</a>
+                        </li>
+                    }
+                </ul>
+                    
             </div>
         </div>
     </div>
     <!-- Topbar End -->
-
+    
     <div>
         @RenderBody()
+    
     </div>
 </body>
 </html>

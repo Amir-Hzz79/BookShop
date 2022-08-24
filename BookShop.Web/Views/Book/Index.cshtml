@@ -1,0 +1,22 @@
+﻿@model BookShop.DataLayer.Models.Book
+
+<html>
+    <head>
+
+    </head>
+    <body>
+        Name:
+        <h1>@Model.Name</h1>
+        Description:
+        <h4>@Model.Description</h4>
+        Price:
+        <h4>@Model.Price</h4>
+        Image:
+        <img src="@Model.Image"/>
+        @foreach (var item in @Model.Authors)
+        {
+            <h5>Author Name:   @item.Name</h5>
+            <h5>About author:  @item.About</h5>
+        }
+    </body>
+</html>

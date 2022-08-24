@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using BookShop.DataLayer;
 using BookShop.DataLayer.Models;
 using BookShop.DataLayer.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BookShop.Web.Areas.Admin.Controllers
 {
+    [Authorize]
     [Area("Admin")]
     public class AuthorsController : Controller
     {
