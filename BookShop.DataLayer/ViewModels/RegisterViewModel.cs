@@ -12,6 +12,9 @@ namespace BookShop.DataLayer.ViewModels
         [Required(ErrorMessage ="Usename required!!")]
         public string Username { get; set; }
 
+        //[Required(ErrorMessage = "Name required!!")]
+        //public string Name { get; set; }
+
         [Required(ErrorMessage = "Email required!!")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }

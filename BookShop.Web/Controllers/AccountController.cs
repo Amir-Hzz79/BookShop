@@ -9,16 +9,12 @@ namespace BookShop.Web.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly IUserService _userService;
 
-        //private RegisterViewModel registerUser;
-        //private LoginViewModel loginUser;
-
-        public AccountController(UserManager<IdentityUser> userManager,SignInManager<IdentityUser> signInManager)
+        public AccountController(IUserService userService)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
+            _userService = userService;
+
         }
 
         public IActionResult Login()
@@ -27,22 +23,21 @@ namespace BookShop.Web.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login([Bind("Username,Password,RememberMe")] LoginViewModel loginUser)
+        public async Task<IActionResult> Login([FromForm] User user/*, [FromQuery] string returnUrl="/"*/)
         {
             if (ModelState.IsValid)
             {
-                var result=await _signInManager.PasswordSignInAsync(loginUser.Username, loginUser.Password, loginUser.RememberMe, false);
+                //var result = await _signInManager.PasswordSignInAsync(user.Username, user.Password, true, false);
 
-                if (result.Succeeded)
-                {
-                    return Redirect("/");
-                }
+                //if (result.Succeeded)
+                //{
+                //    return Redirect("/");
+                //}
 
-                ModelState.AddModelError("","User not found!!");
+                //ModelState.AddModelError("", "User not found!!");
             }
 
-            return View(loginUser);
+            return View(user);
         }
 
         public IActionResult Register()
@@ -52,41 +47,40 @@ namespace BookShop.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register([Bind("Username,Email,Password,ConfirmPassword")] RegisterViewModel registerUser)
+        public async Task<IActionResult> Register([FromForm] User user)
         {
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser()
-                {
-                    UserName = registerUser.Username,
-                    Email = registerUser.Email
-                };
+                //var user = new User()
+                //{
+                //    Username = registerUser.Username,
+                //    Password = registerUser.Password
+                //};
 
-                var result = await _userManager.CreateAsync(user, registerUser.Password);
+                bool isSecceed = _userService.Insert(user);
 
-                if (result.Succeeded)
+                if (isSecceed)
                 {
-                    await _signInManager.SignInAsync(user, false);
+                    //await _signInManager.SignInAsync(user, false);
+                    //SignIn(user);
                     return Redirect("/");
                 }
                 else
                 {
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError("", error.Description);
-                    }
-                   
+                    //foreach (var error in isSecceed.Errors)
+                    //{
+                    //    ModelState.AddModelError("", error.Description);
+                    //}
+
                 }
             }
 
-            return View(registerUser);
+            return View(user);
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
-            await _signInManager.SignOutAsync();
+            //await _signInManager.SignOutAsync();
             return Redirect("/");
         }
     }

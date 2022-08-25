@@ -11,18 +11,18 @@ namespace BookShop.DataLayer.Services
 {
     public class BookService : IBookService
     {
-        private readonly BookShopContext _Context;
+        private readonly BookShopContext _context;
 
         public BookService(BookShopContext bookShopContext)
         {
-            _Context = bookShopContext;
+            _context = bookShopContext;
         }
 
         public bool Delete(Book book)
         {
             try
             {
-                _Context.Books.Remove(book);
+                _context.Books.Remove(book);
                 return true;
             }
             catch
@@ -35,7 +35,7 @@ namespace BookShop.DataLayer.Services
         {
             try
             {
-                _Context.Remove(_Context.Books.Find(bookId));
+                _context.Books.Remove(_context.Books.Find(bookId));
                 return true;
             }
             catch
@@ -46,24 +46,24 @@ namespace BookShop.DataLayer.Services
 
         public Book FirstOrDefault(Expression<Func<Book, bool>> filter)
         {
-            IQueryable<Book> query = _Context.Books.Where(filter).Include(x => x.Authors);
+            IQueryable<Book> query = _context.Books.Where(filter).Include(x => x.Authors);
 
             return query.FirstOrDefault();
         }
 
         public Book Get(int bookId)
         {
-            return _Context.Books.Find(bookId);
+            return _context.Books.Find(bookId);
         }
 
         public IEnumerable<Book> GetAll()
         {
-            return _Context.Books.Include(x => x.Authors);
+            return _context.Books.Include(x => x.Authors);
         }
 
         public IEnumerable<string> GetAllNames()
         {
-            return _Context.Books.Select(x => x.Name);
+            return _context.Books.Select(x => x.Name);
         }
 
         //public IEnumerable<string> GetAuthorsName(int id)
@@ -73,14 +73,14 @@ namespace BookShop.DataLayer.Services
 
         public IEnumerable<Book> GetLastBooks(int count)
         {
-            return _Context.Books.OrderByDescending(s => s.AddDate).Take(count);
+            return _context.Books.OrderByDescending(s => s.AddDate).Take(count);
         }
 
         public bool Insert(Book book)
         {
             try
             {
-                _Context.Books.Add(book);
+                _context.Books.Add(book);
                //book.Authors.Add
                 return true;
             }
@@ -93,14 +93,14 @@ namespace BookShop.DataLayer.Services
 
         public void Save()
         {
-            _Context.SaveChanges();
+            _context.SaveChanges();
         }
 
         public bool Update(Book book)
         {
             try
             {
-                _Context.Books.Update(book);
+                _context.Books.Update(book);
                 return true;
             }
             catch

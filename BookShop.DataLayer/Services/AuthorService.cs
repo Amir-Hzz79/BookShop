@@ -8,18 +8,18 @@ namespace BookShop.DataLayer.Services
 {
     public class AuthorService : IAuthorService
     {
-        private readonly BookShopContext _Context;
+        private readonly BookShopContext _context;
 
         public AuthorService(BookShopContext bookShopContext)
         {
-            _Context = bookShopContext;
+            _context = bookShopContext;
         }
 
         public bool Delete(Author author)
         {
             try
             {
-                _Context.Authors.Remove(author);
+                _context.Authors.Remove(author);
                 return true;
             }
             catch
@@ -32,7 +32,7 @@ namespace BookShop.DataLayer.Services
         {
             try
             {
-                _Context.Remove(_Context.Authors.Find(authorId));
+                _context.Remove(_context.Authors.Find(authorId));
                 return true;
             }
             catch
@@ -43,24 +43,24 @@ namespace BookShop.DataLayer.Services
 
         public Author FirstOrDefault(Expression<Func<Author, bool>> filter)
         {
-            IQueryable<Author> query = _Context.Authors.Where(filter).Include(x => x.Books);
+            IQueryable<Author> query = _context.Authors.Where(filter).Include(x => x.Books);
 
             return query.FirstOrDefault();
         }
 
         public Author Get(int authorId)
         {
-            return _Context.Authors.Find(authorId);
+            return _context.Authors.Find(authorId);
         }
 
         public IEnumerable<Author> GetAll()
         {
-            return _Context.Authors.Include(x => x.Books);
+            return _context.Authors.Include(x => x.Books);
         }
 
         public IEnumerable<string> GetAllNames()
         {
-            return _Context.Authors.Select(x => x.Name);
+            return _context.Authors.Select(x => x.Name);
         }
         //public IEnumerable<Book> GetBooks(int id)
         //{
@@ -71,7 +71,7 @@ namespace BookShop.DataLayer.Services
         {
             try
             {
-                _Context.Authors.Add(author);
+                _context.Authors.Add(author);
                 return true;
             }
             catch
@@ -83,14 +83,14 @@ namespace BookShop.DataLayer.Services
 
         public void Save()
         {
-            _Context.SaveChanges();
+            _context.SaveChanges();
         }
 
         public bool Update(Author author)
         {
             try
             {
-                _Context.Authors.Update(author);
+                _context.Authors.Update(author);
                 return true;
             }
             catch

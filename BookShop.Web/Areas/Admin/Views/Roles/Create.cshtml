@@ -1,0 +1,33 @@
+﻿@model BookShop.DataLayer.ViewModels.RoleViewModel
+
+@{
+    ViewData["Title"] = "Create Role";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+</head>
+
+<h3>Create Role</h3>
+
+<hr />
+<div class="container">
+    <div class="row justify-content-center align-items-center">
+        <div class=" col-md-4 ">
+            <form method="post" asp-action="Login">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input asp-for="Id" type="hidden" class="form-control" />
+
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" type="password" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Login" class="btn btn-success" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
